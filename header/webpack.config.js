@@ -1,3 +1,5 @@
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 const path = require('path');
 
 module.exports = {
@@ -18,6 +20,18 @@ module.exports = {
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "src/index.html",
+    }),
+    new ModuleFederationPlugin({
+      name: 'header',
+      filename: 'header.js',
+      exposes: {
+        './header': './src/header',
+      },
+    }),
+  ],
   devServer: {
     static: {
       directory: path.join(__dirname, 'dist'),
