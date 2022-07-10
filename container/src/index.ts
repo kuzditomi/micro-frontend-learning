@@ -1,1 +1,1 @@
-document.write('Hello webpack!');
+document.getElementById('root')!.innerHTML = 'Hello webpack!';
